@@ -61,7 +61,7 @@ export function ChatKitPanel({ onClose }: ChatKitPanelProps) {
           </div>
           <div className="agent-text">
             <h3 className="agent-name">Riya</h3>
-            <span className="agent-status">SVC Consultants</span>
+            <span className="agent-status">Bloom Hair Transplant</span>
           </div>
         </div>
         <button
