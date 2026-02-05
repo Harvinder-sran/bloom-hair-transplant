@@ -27,7 +27,7 @@ export function WidgetButton({ onClick, isOpen }: WidgetButtonProps) {
                     <line x1="6" y1="6" x2="18" y2="18" />
                 </svg>
             ) : (
-                <img src="/widget-icon.png" alt="Chat" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
+                <MessageCircle size={28} />
             )}
         </button>
     );
