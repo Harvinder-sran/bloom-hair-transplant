@@ -55,8 +55,9 @@ export function ChatKitPanel({ onClose }: ChatKitPanelProps) {
         <div className="agent-info">
           <div className="avatar">
             <img
-              src="https://api.dicebear.com/9.x/micah/svg?seed=Riya&backgroundColor=b6e3f4"
+              src="/agent-avatar.png"
               alt="Riya"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
           <div className="agent-text">
