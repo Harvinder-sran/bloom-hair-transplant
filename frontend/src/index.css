@@ -1,0 +1,317 @@
+@import "tailwindcss";
+
+/* ==================== Light Blue Color Palette ==================== */
+:root {
+  /* Primary Colors */
+  --widget-primary-blue: #4A90E2;
+  --widget-light-blue: #E3F2FD;
+  --widget-white: #FFFFFF;
+  --widget-text: #333333;
+  --widget-text-light: #666666;
+  --widget-border: #E0E0E0;
+  --widget-shadow: rgba(0, 0, 0, 0.08);
+  --widget-shadow-hover: rgba(0, 0, 0, 0.12);
+
+  /* Original theme colors */
+  --background: #ffffff;
+  --foreground: #171717;
+  color-scheme: light;
+}
+
+:root[data-color-scheme="dark"] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-color-scheme]) {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: SFMono-Regular, Consolas, "Liberation Mono", monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+}
+
+/* ==================== Widget Button ==================== */
+.widget-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--widget-primary-blue);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px var(--widget-shadow);
+  transition: all 300ms ease;
+  z-index: 9999;
+}
+
+.widget-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px var(--widget-shadow-hover);
+  background: #3a7bc8;
+}
+
+.widget-button:active {
+  transform: scale(0.95);
+}
+
+/* ==================== Widget Container ==================== */
+.widget-container {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 380px;
+  height: 600px;
+  z-index: 9998;
+  transition: all 300ms ease;
+}
+
+.widget-closed {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  pointer-events: none;
+}
+
+.widget-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .widget-container {
+    width: calc(100vw - 40px);
+    height: calc(100vh - 120px);
+    right: 20px;
+    bottom: 90px;
+  }
+}
+
+/* ==================== Chat Panel ==================== */
+.chat-panel {
+  width: 100%;
+  height: 100%;
+  background: var(--widget-white);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px var(--widget-shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ==================== Chat Header ==================== */
+.chat-header {
+  background: var(--widget-primary-blue);
+  color: white;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 16px 16px 0 0;
+  flex-shrink: 0;
+}
+
+/* Agent Info Styles */
+.agent-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.agent-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.agent-name {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.agent-status {
+  font-size: 12px;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.close-button {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  transition: background 200ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.close-button:active {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ==================== Chat Content ==================== */
+.chat-content {
+  flex: 1;
+  overflow: hidden;
+  background: var(--widget-white);
+  border-radius: 0 0 16px 16px;
+}
+
+/* HIDE INTERNAL HEADERS (The "Hello From AI Assistant" text) */
+.chat-content h1,
+.chat-content h2,
+.chat-content [class*="ThreadTitle"],
+.chat-content [class*="thread-title"] {
+  display: none !important;
+}
+
+/* ==================== ChatKit Overrides ==================== */
+/* Override ChatKit default styles with light blue theme */
+.chat-content [class*="chatkit"] {
+  font-family: var(--font-sans);
+}
+
+/* User message bubbles - blue */
+.chat-content [class*="user"] [class*="message"] {
+  background: var(--widget-primary-blue) !important;
+  color: white !important;
+  border-radius: 16px 16px 4px 16px !important;
+}
+
+/* Bot message bubbles - light gray */
+.chat-content [class*="assistant"] [class*="message"] {
+  background: var(--widget-light-blue) !important;
+  color: var(--widget-text) !important;
+  border-radius: 16px 16px 16px 4px !important;
+}
+
+/* Input field styling */
+.chat-content input[type="text"],
+.chat-content textarea {
+  border: 1px solid var(--widget-border) !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+  font-size: 14px !important;
+  transition: border-color 200ms ease !important;
+}
+
+.chat-content input[type="text"]:focus,
+.chat-content textarea:focus {
+  border-color: var(--widget-primary-blue) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1) !important;
+}
+
+/* Send button */
+.chat-content button[type="submit"] {
+  background: var(--widget-primary-blue) !important;
+  color: white !important;
+  border-radius: 12px !important;
+  padding: 10px 20px !important;
+  transition: all 200ms ease !important;
+  border: none !important;
+}
+
+.chat-content button[type="submit"]:hover {
+  background: #3a7bc8 !important;
+  transform: scale(1.02) !important;
+}
+
+.chat-content button[type="submit"]:active {
+  transform: scale(0.98) !important;
+}
+
+/* Scrollbar styling */
+.chat-content ::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-content ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-content ::-webkit-scrollbar-thumb {
+  background: var(--widget-border);
+  border-radius: 3px;
+}
+
+.chat-content ::-webkit-scrollbar-thumb:hover {
+  background: var(--widget-text-light);
+}
+
+/* ==================== Animations ==================== */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Apply animations when widget opens */
+.widget-open .chat-panel {
+  animation: slideUp 300ms ease;
+}

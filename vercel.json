@@ -1,0 +1,40 @@
+{
+    "version": 2,
+    "name": "managed-chatkit-widget",
+    "buildCommand": "npm run build",
+    "outputDirectory": "frontend/dist",
+    "installCommand": "npm install && cd frontend && npm install",
+    "framework": null,
+    "rewrites": [
+        {
+            "source": "/api/create-session",
+            "destination": "/api/create-session.js"
+        }
+    ],
+    "headers": [
+        {
+            "source": "/api/(.*)",
+            "headers": [
+                {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "*"
+                },
+                {
+                    "key": "Access-Control-Allow-Methods",
+                    "value": "GET, POST, OPTIONS"
+                },
+                {
+                    "key": "Access-Control-Allow-Headers",
+                    "value": "Content-Type, Authorization"
+                },
+                {
+                    "key": "Access-Control-Allow-Credentials",
+                    "value": "true"
+                }
+            ]
+        }
+    ],
+    "env": {
+        "NODE_ENV": "production"
+    }
+}
